@@ -1,0 +1,30 @@
+{
+    "name": "projekt-webowe-node",
+    "version": "1.0.0",
+    "description": "Trips app API",
+    "main": "server.js",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "mongoose": "^5.8.1",
+        "multer": "^1.4.2",
+        "sharp": "^0.23.4",
+        "socket.io": "^2.3.0",
+        "uuidv4": "^6.0.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kszczyrbak/projekt-webowe-node"
+    },
+    "author": "Krzysztof Szczyrbak",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/kszczyrbak/projekt-webowe-node/issues"
+    },
+    "homepage": "https://github.com/kszczyrbak/projekt-webowe-node#readme"
+}
