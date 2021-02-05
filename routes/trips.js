@@ -1,51 +1,24 @@
 const trips = require('express').Router();
 'use strict';
 
-const uuidv4 = require('uuid/v4');
-const sharp = require('sharp')
-const fs = require('fs')
-const multer = require('multer')
-const upload = multer({
-    dest: 'public/'
-})
-const path = require('path')
+const { upload } = require('./upload')
 
+const { updateSeatsLeft } = require('./common')
 
 const Trip = require('../models/trip')
+const Comment = require('../models/comment')
 
-
-trips.post('/:trip_id/upload', upload.single('image'), async(req, res) => {
-    const imagePath = path.join(__dirname, '/public')
-    if (!req.file) {
-        res.status(401).json({
-            error: 'Please provide an image'
-        });
-    }
-    const filename = `${uuidv4()}.png`
-
-    await sharp(req.file.path)
-        .resize(500, 500)
-        .jpeg({
-            quality: 50
-        })
-        .toFile(
-            path.resolve(`${imagePath}/${filename}`)
-        )
-    fs.unlinkSync(req.file.path)
-
-    res.status(200).json({
-        name: filename
-    });
-
+trips.post('/:trip_id/upload', upload.single('image'), (req, res) => {
     Trip.findOneAndUpdate({
         _id: req.params.trip_id
     }, {
         $push: {
-            photos: filename
+            photos: req.filename
         }
     }).then(trip => {
         console.log(trip.photos)
     })
+    res.send({ file: req.filename });
 })
 
 trips.post('/', (req, res) => {

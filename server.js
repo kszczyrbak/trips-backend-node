@@ -18,7 +18,8 @@ mongoose.connect(connectionString, {
     useNewUrlParser: true,
     useFindAndModify: false,
     user: username,
-    pass: password
+    pass: password,
+    useUnifiedTopology: true
 });
 
 let db = mongoose.connection;

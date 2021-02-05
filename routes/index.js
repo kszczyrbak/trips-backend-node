@@ -3,6 +3,7 @@ const comments = require('./comments');
 const orders = require('./orders');
 const trips = require('./trips');
 const users = require('./users');
+const upload = require('./upload');
 
 routes.use('/users', users);
 routes.use('/trips', trips);

@@ -1,6 +1,8 @@
 const orders = require('express').Router();
 'use strict';
 
+const { updateSeatsLeft } = require('./common')
+
 const Order = require('../models/order')
 const Trip = require('../models/trip')
 
@@ -93,17 +95,6 @@ function cancelUpdateSeatCount(order) {
             updateSeatsLeft(trip);
         }
     )
-}
-
-function updateSeatsLeft(trip) {
-    if (trip.seatsLeft > trip.maxSeats) {
-        trip.seatsLeft = trip.maxSeats;
-        let id = trip._id
-        delete trip._id;
-        Trip.findByIdAndUpdate(id, trip).then(trip => {
-            console.log(trip);
-        });
-    }
 }
 
 module.exports = orders;
